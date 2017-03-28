@@ -25,8 +25,24 @@ class Kele
     response = self.class.get("https://www.bloc.io/api/v1/mentors/#{id}/student_availability")
   end
 
-  def get_messages(page)
-    response = self.class.get("https://www.bloc.io/api/v1/message_threads", headers: { "authorization" => @auth_token }, body: {"page": page })
+  def get_messages(page = nil)
+    if page
+      response = self.class.get("https://www.bloc.io/api/v1/message_threads", headers: { "authorization" => @auth_token }, body: {"page": page })
+    else
+      response = self.class.get("https://www.bloc.io/api/v1/message_threads", headers: { "authorization" => @auth_token })
+    end
+  end
 
+  # this is what I'm passing in: mal.create_message("malloryworks@gmail.com","523730", "", "", "Another test!")
+  def create_message(email, recipient_id, token, subject, message)
+    response = self.class.post("https://www.bloc.io/api/v1/messages", headers: { "authorization" => @auth_token },
+      body: {
+        sender: email,
+        recipient_id: recipient_id,
+        token: token,
+        subject: subject,
+        "stripped-text": message
+      }
+    )
   end
 end
