@@ -33,16 +33,17 @@ class Kele
     end
   end
 
-  # this is what I'm passing in: mal.create_message("malloryworks@gmail.com","523730", "", "", "Another test!")
-  def create_message(email, recipient_id, token, subject, message)
-    response = self.class.post("https://www.bloc.io/api/v1/messages", headers: { "authorization" => @auth_token },
+  # 500 error when entering token, this is what I'm passing in: mal.create_message("malloryworks@gmail.com","523730", "", "", "Another test!")
+  def create_message(email, recipient_id, subject, token, message)
+    response = self.class.post("https://www.bloc.io/api/v1/messages",
       body: {
         sender: email,
         recipient_id: recipient_id,
-        token: token,
         subject: subject,
+        token: token,
         "stripped-text": message
-      }
+      },
+      headers: { "authorization" => @auth_token },
     )
   end
 end
