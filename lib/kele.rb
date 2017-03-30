@@ -46,4 +46,18 @@ class Kele
       headers: { "authorization" => @auth_token },
     )
   end
+
+  def create_message(assignment_branch, assignment_commit_link, checkpoint_id, comment, enrollment_id)
+    response = self.class.post("https://www.bloc.io/api/v1/checkpoint_submissions
+",
+      body: {
+        assignment_branch: "checkpoint-7",
+        assignment_commit_link: "https://github.com/malworks/Kele/commit/35c7a8b547c4a07412b3d88eb64c8219391bcacd",
+        checkpoint_id: "2162",
+        comment: "This is a comment",
+        enrollment_id: ""
+      },
+      headers: { "authorization" => @auth_token },
+    )
+  end
 end
