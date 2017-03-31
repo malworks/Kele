@@ -34,28 +34,27 @@ class Kele
   end
 
   # 500 error when entering token, this is what I'm passing in: mal.create_message("malloryworks@gmail.com","523730", "", "", "Another test!")
-  def create_message(email, recipient_id, subject, token, message)
+  def create_message(email, recipient_id, subject, message)
     response = self.class.post("https://www.bloc.io/api/v1/messages",
       body: {
         sender: email,
         recipient_id: recipient_id,
         subject: subject,
-        token: token,
+        # token: token,
         "stripped-text": message
       },
       headers: { "authorization" => @auth_token },
     )
   end
 
-  def create_message(assignment_branch, assignment_commit_link, checkpoint_id, comment, enrollment_id)
-    response = self.class.post("https://www.bloc.io/api/v1/checkpoint_submissions
-",
+  def create_submission(assignment_branch, assignment_commit_link, checkpoint_id, comment, enrollment_id)
+    response = self.class.post("https://www.bloc.io/api/v1/checkpoint_submissions",
       body: {
         assignment_branch: "checkpoint-7",
         assignment_commit_link: "https://github.com/malworks/Kele/commit/35c7a8b547c4a07412b3d88eb64c8219391bcacd",
         checkpoint_id: "2162",
         comment: "This is a comment",
-        enrollment_id: ""
+        enrollment_id: "2348927"
       },
       headers: { "authorization" => @auth_token },
     )
